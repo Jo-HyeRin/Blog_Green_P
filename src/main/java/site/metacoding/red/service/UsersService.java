@@ -25,7 +25,11 @@ public class UsersService {
 	
 	public Users 로그인(LoginDto loginDto) {
 		Users usersPS = usersDao.findByUsername(loginDto.getUsername());
-
+		
+		if(usersPS == null) {
+			return null;
+		}
+		
 		if(usersPS.getPassword().equals(loginDto.getPassword())) {
 			return usersPS;
 		}else {
@@ -33,15 +37,17 @@ public class UsersService {
 		}
 	}
 	
-	public void 회원수정(Integer id, UpdateDto updateDto) {
-		// 1. 영속화
+	public Users 회원수정(Integer id, UpdateDto updateDto) {
+		// 1. 영속화 (대상 찾아서)
 		Users usersPS = usersDao.findById(id);
 		
-		// 2. 영속화된 객체 변경
+		// 2. 영속화된 객체 변경 (대상 바꾸고)
 		usersPS.update(updateDto);
 		
-		// 3. 디비 수행
+		// 3. 디비 수행 (바꾼 대상 디비에 입력)
 		usersDao.update(usersPS);
+		
+		return usersPS;
 	}
 	
 	@Transactional(rollbackFor = RuntimeException.class)

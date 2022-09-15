@@ -36,8 +36,7 @@
 	</select>
 
 	<update id="updateByUsersId">
-		UPDATE boards SET usersId = null WHERE usersId =
-		#{usersId}
+		UPDATE boards SET usersId = null WHERE usersId = #{usersId}
 	</update>
 
 </mapper>
