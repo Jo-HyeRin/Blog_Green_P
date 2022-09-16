@@ -2,7 +2,7 @@
 
 let isUsernameSameCheck = false; // 초기화하지 않으면 default 값이 true. 중복체크를 하지 않으면 넘어가지 않게 하기 위해서
 
-//========== 
+//========== 이벤트 ==========//
 
 // 회원가입
 $("#btnJoin").click(() => {
@@ -17,6 +17,7 @@ $("#btnUsernameSameCheck").click(() => {
 // 로그인
 $("#btnLogin").click(() => {
 	login();
+	//rememberTest();
 });
 
 // DELETE : body 없다. 
@@ -86,10 +87,17 @@ function checkUsername() {
 	});
 }
 
+function rememberTest() {
+	let remember = $("#remember").prop("checked");
+	console.log(remember);
+}
+
 function login() {
+	alert("로그인시작");
 	let data = {
 		username: $("#username").val(),
-		password: $("#password").val()
+		password: $("#password").val(),
+		remember: $("#remember").prop("checked")
 	};
 
 	$.ajax("/login", {
