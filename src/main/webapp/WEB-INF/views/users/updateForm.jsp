@@ -22,49 +22,7 @@
 	</form>
 </div>
 
-<script>
-// DELETE : body 없다. 
-	$("#btnDelete").click(()=>{
-		let id = $("#id").val();
-	
-	   $.ajax("/users/"+id,{
-		      type: "DELETE",
-		      dataType: "json"		      
-		   }).done((res)=>{
-		     if(res.code == 1){       
-		    	alert("회원탈퇴 완료");
-		    	location.href = "/";
-		     }else{
-		   	   	alert("회원탈퇴 실패");
-		     }    	
-		});		
-	});
-
-// UPDATE
-	$("#btnUpdate").click(()=>{
-		let data = {
-				password: $("#password").val(),
-				email: $("#email").val()
-		};
-		let id = $("#id").val();
-		
-	   $.ajax("/users/"+id,{
-		      type: "PUT",
-		      dataType: "json",
-		      data: JSON.stringify(data),
-		      headers : {
-		            "Content-Type" : "application/json; charset=utf-8"
-		      }
-		   }).done((res)=>{
-		     if(res.code == 1){       
-		    	alert("회원수정완료");
-		      	location.reload(); // f5
-		     }else{
-		   	   	alert("업데이트에 실패하였습니다");
-		     }    	
-		});		
-	});
-</script>
+<script src="/js/users.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
 
